@@ -1,5 +1,5 @@
 ## What is it? ##
-CodeSandbox is a *Docker* based sandbox to run untrusted code and return the output to your app. Users can submit their code in any of the supported languages. The system will test the code in an isolated environment. This way you do not have to worry about untrusted code possibly damaging your server intentionally or unintentionally.
+CompileBox is a *Docker* based sandbox to run untrusted code and return the output to your app. Users can submit their code in any of the supported languages. The system will test the code in an isolated environment. This way you do not have to worry about untrusted code possibly damaging your server intentionally or unintentionally.
 You can use this system to allow your users to compile their code right in the browser.
 
 Check the example work at:
@@ -40,7 +40,7 @@ No two codes have access to each other’s *Docker* or files.
     - Navigate your browser to http://127.0.0.1/
     
     ## Supported Operating Systems ##
-    The CodeSandbox API has been installed and run succesfully on the following platforms
+    The CompileBox API has been installed and run succesfully on the following platforms
 	- Ubuntu 12.04 LTS
     - Ubuntu 13.10
     - Ubuntu 14.04 LTS
