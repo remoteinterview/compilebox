@@ -16,7 +16,7 @@ No two codes have access to each other’s *Docker* or files.
 
 ## Installation Instructions ##
 
-* In the 'Installation' folder go to the 'Setup' directory.
+* Go to the 'Setup' directory.
     - Open the Terminal as root user
     
     - Execute the script **Install_*.sh**, select the file which best suites your Operating System description. This will install the Docker and NodeJs pre-requisites to your system and create an image called 'virtual_machine' inside the Docker. DockerVM may take around 20 to 30 minutes depending on your internet connection.
