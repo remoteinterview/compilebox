@@ -50,11 +50,11 @@ No two codes have access to each other’s *Docker* or files.
 
 The default Dockerfile installs the most used languages. To remove/change any, follow these steps
 
-In order to select languages of your own choice you need to make 2 changes.
-    	1. <B>Dockerfile</B>: This file contains commands that you would normally give in your terminal to install that language. Add the required commands preceeded by the RUN keyword inside the Dockerfile. Run the "UpdateDocker.sh" script, present in the same folder if you are adding new language to already installed API, execute the Install_*.sh script otherwise, from your terminal after making the changes to your Dockerfile.
-        2. <B>Compilers.js</B>: This file is inside the API folder. The compiler name, the source file name and the execution commands to Docker Container are taken from this file. This file only contains an array, which is described in detail inside the file. Add the credentials of the language you are adding to this array.
-    
-- The next time you wish to compile using this language, simply issue the language_id , which is  same as the index of the language in the array present in Compilers.js, along with your code to the NodeJs server.
+In order to select languages of your own choice you need to make 2 changes.<br>
+    	1. <B>Dockerfile</B>: This file contains commands that you would normally give in your terminal to install that language. Add the required commands preceeded by the RUN keyword inside the Dockerfile. Run the "UpdateDocker.sh" script, present in the same folder if you are adding new language to already installed API, execute the Install_*.sh script otherwise, from your terminal after making the changes to your Dockerfile.<br>
+        2. <B>Compilers.js</B>: This file is inside the API folder. The compiler name, the source file name and the execution commands to Docker Container are taken from this file. This file only contains an array, which is described in detail inside the file. Add the credentials of the language you are adding to this array.<br>
+        
+The next time you wish to compile using this language, simply issue the language_id , which is  same as the index of the language in the array present in Compilers.js, along with your code to the NodeJs server.
 
 > Note: Additionally while setting up the API for the first time, you can comment out those languages from the Dockerfile that you do not wish to install, since they can be added later.
 
@@ -62,9 +62,9 @@ In order to select languages of your own choice you need to make 2 changes.
 
 
 In order to add your own languages you need to following steps.
-    	1. <b>Modify the Dockerfile</b>: The Dockerfile is present in the Setup folder and contains the commands that you would normally write in your terminal to install a particular language. Append the commands for the language of your choice to the end of the Dockerfile. 
-        2. <b>Execute UpdateDocker.sh</b> and wait for your language to be installed inside the virtual machine. 
-        3. <b>Modify Compilers.js</b>: Compilers.js file is available in the API folder and contains the information needed by app.js to compile a given source code inside Docker container. The file only consists of an array which is described in detail inside the file. Add the credentials for your language to the Array.
+1. <b>Modify the Dockerfile</b>: The Dockerfile is present in the Setup folder and contains the commands that you would normally write in your terminal to install a particular language. Append the commands for the language of your choice to the end of the Dockerfile.     	
+2. <b>Execute UpdateDocker.sh</b> and wait for your language to be installed inside the virtual machine. 
+3. <b>Modify Compilers.js</b>: Compilers.js file is available in the API folder and contains the information needed by app.js to compile a given source code inside Docker container. The file only consists of an array which is described in detail inside the file. Add the credentials for your language to the Array.
 
 > Note:  You should be connected to the Internet when you run UpdateDocker.sh
 
