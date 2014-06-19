@@ -1,0 +1,1 @@
+This folder will contain the temporary shared directories which will be mounted to docker containers.
