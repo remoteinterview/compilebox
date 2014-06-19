@@ -108,7 +108,7 @@ DockerSandbox.prototype.execute = function(success)
     var sandbox = this;
 
     //this statement is what is executed
-    var st = './DockerTimeout.sh ' + this.timeout_value + 's -i -t -v ' + this.path + this.folder + ':/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command;
+    var st = './DockerTimeout.sh ' + this.timeout_value + 's -i -t -v "' + this.path + this.folder + '":/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command;
     
     //log the statement in console
     console.log(st);
