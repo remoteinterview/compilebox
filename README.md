@@ -68,5 +68,5 @@ In order to add your own languages you need to following steps.
 
 > Note:  You should be connected to the Internet when you run UpdateDocker.sh
 
-  [1]: compile.remoteinterview.io
-  [2]: codepad.remoteinterview.io
+  [1]: http://compile.remoteinterview.io
+  [2]: http://codepad.remoteinterview.io
