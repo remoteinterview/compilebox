@@ -1,5 +1,5 @@
 ## What is it? ##
-CodeSandbox is a *Docker* based sandbox in which you can run user-submitted code and return the output back to your app. Users can submit their code in any of the supported languages. The system will test the code in an isolated environment. This way you do not have to worry about untrusted code possibly damaging your server intentionally or unintentionally.
+CodeSandbox is a *Docker* based sandbox to run untrusted code and return the output to your app. Users can submit their code in any of the supported languages. The system will test the code in an isolated environment. This way you do not have to worry about untrusted code possibly damaging your server intentionally or unintentionally.
 You can use this system to allow your users to compile their code right in the browser.
 
 Check the example work at:
