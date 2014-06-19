@@ -9,7 +9,7 @@ var express = require('express');
 var arr = require('./compilers');
 var sandBox = require('./DockerSandbox');
 var app = express.createServer();
-var port=3000;
+var port=80;
 
 app.use(express.static(__dirname));
 app.use(express.bodyParser());
