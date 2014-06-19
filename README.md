@@ -62,8 +62,9 @@ The next time you wish to compile using this language, simply issue the language
 
 
 In order to add your own languages you need to following steps.
-1. <b>Modify the Dockerfile</b>: The Dockerfile is present in the Setup folder and contains the commands that you would normally write in your terminal to install a particular language. Append the commands for the language of your choice to the end of the Dockerfile.     	
-2. <b>Execute UpdateDocker.sh</b> and wait for your language to be installed inside the virtual machine. 
+<br>
+1. <b>Modify the Dockerfile</b>: The Dockerfile is present in the Setup folder and contains the commands that you would normally write in your terminal to install a particular language. Append the commands for the language of your choice to the end of the Dockerfile.     	<br>
+2. <b>Execute UpdateDocker.sh</b> and wait for your language to be installed inside the virtual machine. <br>
 3. <b>Modify Compilers.js</b>: Compilers.js file is available in the API folder and contains the information needed by app.js to compile a given source code inside Docker container. The file only consists of an array which is described in detail inside the file. Add the credentials for your language to the Array.
 
 > Note:  You should be connected to the Internet when you run UpdateDocker.sh
