@@ -1,7 +1,8 @@
 /*
         *File: DockerSandbox.js
         *Author: Osman Ali Mian/Asad Memon
-        *Last Modified: 3rd June 2014
+        *Created: 3rd June 2014
+        *Revised on: 25th June 2014 (Added folder mount permission and changed executing user to nobody using -u argument)
 */
 
 
@@ -65,9 +66,9 @@ DockerSandbox.prototype.prepare = function(success)
     var fs = require('fs');
     var sandbox = this;
 
-    exec("mkdir "+ this.folder + " && cp ./Payload/* ./"+ this.folder,function(st)
+    exec("mkdir "+ this.path+this.folder + " && cp "+this.path+"/Payload/* "+this.path+this.folder+"&& chmod 777 "+ this.path+this.folder,function(st)
         {
-            fs.writeFile("./" + sandbox.folder+"/" + sandbox.file_name, sandbox.code,function(err) 
+            fs.writeFile(sandbox.path + sandbox.folder+"/" + sandbox.file_name, sandbox.code,function(err) 
             {
                 if (err) 
                 {
@@ -108,7 +109,7 @@ DockerSandbox.prototype.execute = function(success)
     var sandbox = this;
 
     //this statement is what is executed
-    var st = './DockerTimeout.sh ' + this.timeout_value + 's -i -t -v "' + this.path + this.folder + '":/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command;
+    var st = this.path+'DockerTimeout.sh ' + this.timeout_value + 's  -u nobody -i -t -v  "' + this.path + this.folder + '":/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command;
     
     //log the statement in console
     console.log(st);
@@ -120,10 +121,10 @@ DockerSandbox.prototype.execute = function(success)
     var intid = setInterval(function() 
         {
             //Displaying the checking message after 1 second interval
-            console.log("Checking " + sandbox.folder + ": for completion: " + myC);
+            console.log("Checking " + sandbox.path+sandbox.folder + ": for completion: " + myC);
             myC = myC + 1;
 
-            var dt = fs.readFile('./' + sandbox.folder + '/completed', 'utf8', function(err, data) {
+            var dt = fs.readFile(sandbox.path + sandbox.folder + '/completed', 'utf8', function(err, data) {
             
             //if file is not available yet and the file interval is not yet up carry on
             if (err && myC < sandbox.timeout_value) 

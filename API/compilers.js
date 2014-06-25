@@ -1,4 +1,3 @@
-
 /*
 	This file stores the compiler/interpretor details that are provided to DockerSandbox.sh	by the app.js
 	The index is the key field, 
@@ -27,7 +26,7 @@ compilerArray[3] = ["php","file.php",""];
 compilerArray[4] = ["nodejs","file.js",""];
 compilerArray[5] = ["scala","file.scala",""];
 compilerArray[6] = ["\'go run\'","file.go",""];
-compilerArray[7] = ["g++","file.cpp","./a.out"];
+compilerArray[7] = ["\'g++ -o /usercode/a.out\' ","file.cpp","/usercode/a.out"];
 compilerArray[8] = ["javac","file.java","\'./usercode/javaRunner.sh\'"];
 compilerArray[9] = ["\'vbnc -nologo -quiet\'","file.vb","\'mono /usercode/file.exe\'"];
 compilerArray[10] = ["gmcs","file.cs","\'mono /usercode/file.exe\'"];
