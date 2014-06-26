@@ -49,6 +49,10 @@ else
 	#Branch 2a
 	if [ $? -eq 0 ];	then
 		$output #| tee /usercode/output.txt    
+		if[ $? -eq 0 ]; then
+			echo "Execution Failed"
+			cat /usercode/logfile.txt
+		fi
 	#Branch 2b
 	else
 	    echo "Compilation Failed"

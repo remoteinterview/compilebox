@@ -124,7 +124,7 @@ DockerSandbox.prototype.execute = function(success)
             console.log("Checking " + sandbox.path+sandbox.folder + ": for completion: " + myC);
             myC = myC + 1;
 
-            var dt = fs.readFile(sandbox.path + sandbox.folder + '/completed', 'utf8', function(err, data) {
+            fs.readFile(sandbox.path + sandbox.folder + '/completed', 'utf8', function(err, data) {
             
             //if file is not available yet and the file interval is not yet up carry on
             if (err && myC < sandbox.timeout_value) 
@@ -136,11 +136,18 @@ DockerSandbox.prototype.execute = function(success)
             else if (myC < sandbox.timeout_value) 
             {
                 console.log("DONE");
+                //return the data to the calling functoin
+            	success(data);
             } 
             //if time is up. Save an error message to the data variable
             else 
             {
-                data = "Execution Timed Out";
+            	//Since the time is up, we take the partial output and return it.
+            	fs.readFile(sandbox.path + sandbox.folder + '/logfile.txt', 'utf8', function(err, data){
+            		data += "\nExecution Timed Out";
+            		success(data);	
+            	});
+                
             }
 
 
@@ -148,8 +155,7 @@ DockerSandbox.prototype.execute = function(success)
             console.log("ATTEMPTING: rm -r " + sandbox.folder);
             exec("rm -r " + sandbox.folder);
 
-            //return the data to the calling functoin
-            success(data);
+            
             clearInterval(intid);
         });
     }, 1000);
