@@ -2,6 +2,7 @@
         *File: app.js
         *Author: Asad Memon / Osman Ali Mian
         *Last Modified: 5th June 2014
+        *Revised on: 30th June 2014 (Introduced Express-Brute for Bruteforce protection)
 */
 
 
@@ -10,6 +11,14 @@ var arr = require('./compilers');
 var sandBox = require('./DockerSandbox');
 var app = express.createServer();
 var port=80;
+
+
+var ExpressBrute = require('express-brute');
+var store = new ExpressBrute.MemoryStore(); // stores state locally, don't use this in production
+var bruteforce = new ExpressBrute(store,{
+    freeRetries: 50,
+    lifetime: 3600
+});
 
 app.use(express.static(__dirname));
 app.use(express.bodyParser());
@@ -29,7 +38,7 @@ function random(size) {
 }
 
 
-app.post('/compile', function(req, res) 
+app.post('/compile',bruteforce.prevent,function(req, res) 
 {
 
     var language = req.body.language;
@@ -41,7 +50,7 @@ app.post('/compile', function(req, res)
     var timeout_value=20;//Timeout Value, In Seconds
 
     //details of this are present in DockerSandbox.js
-    var sandboxType = new sandBox(timeout_value,path,folder,vm_name,arr.compilerArray[language][0],arr.compilerArray[language][1],code,arr.compilerArray[language][2]);
+    var sandboxType = new sandBox(timeout_value,path,folder,vm_name,arr.compilerArray[language][0],arr.compilerArray[language][1],code,arr.compilerArray[language][2],arr.compilerArray[language][3]);
 
 
     //data will contain the output of the compiled/interpreted code

@@ -4,6 +4,10 @@
   "main": "app.js",
   "dependencies": {
     "express": "2.5.11",
+    "express-brute":"*",
+    "express-brute-memcached":"*",
+    "moment": "*",
+    "connect-flash": "*",
     "exports": "*"
   },
   "author": "Osman Ali",

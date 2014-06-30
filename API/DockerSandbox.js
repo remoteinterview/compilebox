@@ -3,6 +3,7 @@
         *Author: Osman Ali Mian/Asad Memon
         *Created: 3rd June 2014
         *Revised on: 25th June 2014 (Added folder mount permission and changed executing user to nobody using -u argument)
+        *Revised on: 30th June 2014 (Changed the way errors are logged on console, added language name into error messages)
 */
 
 
@@ -19,7 +20,7 @@
          * @param {String} code: The actual code
          * @param {String} output_command: Used in case of compilers only, to execute the object code, send " " in case of interpretors
 */
-var DockerSandbox = function(timeout_value,path,folder,vm_name,compiler_name,file_name,code,output_command)
+var DockerSandbox = function(timeout_value,path,folder,vm_name,compiler_name,file_name,code,output_command,languageName)
 {
 
     this.timeout_value=timeout_value;
@@ -30,6 +31,7 @@ var DockerSandbox = function(timeout_value,path,folder,vm_name,compiler_name,fil
     this.file_name=file_name;
     this.code = code;
     this.output_command=output_command;
+    this.langName=languageName;
 }
 
 
@@ -76,7 +78,7 @@ DockerSandbox.prototype.prepare = function(success)
                 }    
                 else
                 {
-                    console.log("The file was saved!");
+                    console.log(sandbox.langName+" file was saved!");
                     success();
                 } 
             });
@@ -120,8 +122,9 @@ DockerSandbox.prototype.execute = function(success)
     //Check For File named "completed" after every 1 second
     var intid = setInterval(function() 
         {
-            //Displaying the checking message after 1 second interval
-            console.log("Checking " + sandbox.path+sandbox.folder + ": for completion: " + myC);
+            //Displaying the checking message after 1 second interval, testing purposes only
+            //console.log("Checking " + sandbox.path+sandbox.folder + ": for completion: " + myC);
+
             myC = myC + 1;
 
             fs.readFile(sandbox.path + sandbox.folder + '/completed', 'utf8', function(err, data) {
@@ -144,7 +147,9 @@ DockerSandbox.prototype.execute = function(success)
             {
             	//Since the time is up, we take the partial output and return it.
             	fs.readFile(sandbox.path + sandbox.folder + '/logfile.txt', 'utf8', function(err, data){
-            		data += "\nExecution Timed Out";
+            		if (!data) data = "";
+                    data += "\nExecution Timed Out";
+                    console.log(data + ": "+sandbox.folder+" "+sandbox.langName)
             		success(data);	
             	});
                 
@@ -152,7 +157,7 @@ DockerSandbox.prototype.execute = function(success)
 
 
             //now remove the temporary directory
-            console.log("ATTEMPTING: rm -r " + sandbox.folder);
+            console.log("ATTEMPTING TO REMOVE: " + sandbox.folder);
             exec("rm -r " + sandbox.folder);
 
             
