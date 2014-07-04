@@ -20,7 +20,7 @@
          * @param {String} code: The actual code
          * @param {String} output_command: Used in case of compilers only, to execute the object code, send " " in case of interpretors
 */
-var DockerSandbox = function(timeout_value,path,folder,vm_name,compiler_name,file_name,code,output_command,languageName)
+var DockerSandbox = function(timeout_value,path,folder,vm_name,compiler_name,file_name,code,output_command,languageName,e_arguments)
 {
 
     this.timeout_value=timeout_value;
@@ -32,6 +32,7 @@ var DockerSandbox = function(timeout_value,path,folder,vm_name,compiler_name,fil
     this.code = code;
     this.output_command=output_command;
     this.langName=languageName;
+    this.extra_arguments=e_arguments;
 }
 
 
@@ -79,6 +80,7 @@ DockerSandbox.prototype.prepare = function(success)
                 else
                 {
                     console.log(sandbox.langName+" file was saved!");
+                    exec("chmod 777 \'"+sandbox.path+sandbox.folder+"/"+sandbox.file_name+"\'")
                     success();
                 } 
             });
@@ -111,14 +113,14 @@ DockerSandbox.prototype.execute = function(success)
     var sandbox = this;
 
     //this statement is what is executed
-    var st = this.path+'DockerTimeout.sh ' + this.timeout_value + 's  -u nobody -i -t -v  "' + this.path + this.folder + '":/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command;
+    var st = this.path+'DockerTimeout.sh ' + this.timeout_value + 's  -u nobody -i -t -v  "' + this.path + this.folder + '":/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command+ ' ' + this.extra_arguments;
     
     //log the statement in console
     console.log(st);
 
     //execute the Docker, This is done ASYNCHRONOUSLY
     exec(st);
-
+	console.log("------------------------------")
     //Check For File named "completed" after every 1 second
     var intid = setInterval(function() 
         {
@@ -126,7 +128,7 @@ DockerSandbox.prototype.execute = function(success)
             //console.log("Checking " + sandbox.path+sandbox.folder + ": for completion: " + myC);
 
             myC = myC + 1;
-
+			
             fs.readFile(sandbox.path + sandbox.folder + '/completed', 'utf8', function(err, data) {
             
             //if file is not available yet and the file interval is not yet up carry on
@@ -149,7 +151,8 @@ DockerSandbox.prototype.execute = function(success)
             	fs.readFile(sandbox.path + sandbox.folder + '/logfile.txt', 'utf8', function(err, data){
             		if (!data) data = "";
                     data += "\nExecution Timed Out";
-                    console.log(data + ": "+sandbox.folder+" "+sandbox.langName)
+                    console.log("Timed Out: "+sandbox.folder+" "+sandbox.langName)
+
             		success(data);	
             	});
                 
@@ -158,6 +161,7 @@ DockerSandbox.prototype.execute = function(success)
 
             //now remove the temporary directory
             console.log("ATTEMPTING TO REMOVE: " + sandbox.folder);
+            console.log("------------------------------")
             exec("rm -r " + sandbox.folder);
 
             

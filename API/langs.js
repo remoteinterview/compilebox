@@ -10,7 +10,8 @@ var LANGS = {
     "Python": [0, "text/x-python"],
     "Ruby": [1, "text/x-ruby"],
     "Scala": [5, "text/x-scala"],
-    "VB.NET": [9, "text/x-vb"]
+    "VB.NET": [9, "text/x-vb"],
+    "Bash": [11, "text/x-bash"],
 }
 
 
@@ -25,6 +26,7 @@ var Codes = {
     "PHP": "<?php\n$ho = fopen('php://stdout', \"w\");\n\nfwrite($ho, \"Hello\");\n\n\nfclose($ho);\n",
     "Python": "print \"Hello\"",
     "Ruby": "puts \"Hello\"",
+    "Bash": "echo 'Hi' ",
     "Scala": "object HelloWorld {def main(args: Array[String]) = println(\"Hello\")}",
     "VB.NET": "Imports System\n\nPublic Class Test\n\tPublic Shared Sub Main() \n    \tSystem.Console.WriteLine(\"Hello\")\n\tEnd Sub\nEnd Class"
 }
