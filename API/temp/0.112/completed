@@ -1,4 +1,0 @@
-In file included from /usr/include/GNUstep/Foundation/NSClassDescription.h:30:0,
-                 from /usr/include/GNUstep/Foundation/Foundation.h:50,
-                 from /usercode/file.m:2:
-/usr/include/GNUstep/Foundation/NSException.h:42:2: error: #error The current setting for native-objc-exceptions does not match that of gnustep-base ... please correct this.
