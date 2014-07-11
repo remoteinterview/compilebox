@@ -38,4 +38,7 @@ RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true 
 RUN apt-get install -y oracle-java7-installer
 
 
+RUN apt-get install -y gobjc
+RUN apt-get install -y gnustep-devel &&  sed -i 's/#define BASE_NATIVE_OBJC_EXCEPTIONS     1/#define BASE_NATIVE_OBJC_EXCEPTIONS     0/g' /usr/include/GNUstep/GNUstepBase/GSConfig.h
+
 

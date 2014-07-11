@@ -12,6 +12,7 @@ var LANGS = {
     "Scala": [5, "text/x-scala"],
     "VB.NET": [9, "text/x-vb"],
     "Bash": [11, "text/x-bash"],
+    "Objective-C": [12,"text/x-objectivec"]
 }
 
 
@@ -27,6 +28,7 @@ var Codes = {
     "Python": "print \"Hello\"",
     "Ruby": "puts \"Hello\"",
     "Bash": "echo 'Hi' ",
+    "Objective-C": "#include <Foundation/Foundation.h>\n\n@interface Test\n+ (const char *) classStringValue;\n@end\n\n@implementation Test\n+ (const char *) classStringValue;\n{\n    return \"Hey!\";\n}\n@end\n\nint main(void)\n{\n    printf(\"%s\\n\", [Test classStringValue]);\n    return 0;\n}",
     "Scala": "object HelloWorld {def main(args: Array[String]) = println(\"Hello\")}",
     "VB.NET": "Imports System\n\nPublic Class Test\n\tPublic Shared Sub Main() \n    \tSystem.Console.WriteLine(\"Hello\")\n\tEnd Sub\nEnd Class"
 }
