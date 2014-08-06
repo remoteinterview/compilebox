@@ -20,7 +20,7 @@
          * @param {String} code: The actual code
          * @param {String} output_command: Used in case of compilers only, to execute the object code, send " " in case of interpretors
 */
-var DockerSandbox = function(timeout_value,path,folder,vm_name,compiler_name,file_name,code,output_command,languageName,e_arguments)
+var DockerSandbox = function(timeout_value,path,folder,vm_name,compiler_name,file_name,code,output_command,languageName,e_arguments,stdin_data)
 {
 
     this.timeout_value=timeout_value;
@@ -33,6 +33,7 @@ var DockerSandbox = function(timeout_value,path,folder,vm_name,compiler_name,fil
     this.output_command=output_command;
     this.langName=languageName;
     this.extra_arguments=e_arguments;
+    this.stdin_data=stdin_data;
 }
 
 
@@ -81,10 +82,27 @@ DockerSandbox.prototype.prepare = function(success)
                 {
                     console.log(sandbox.langName+" file was saved!");
                     exec("chmod 777 \'"+sandbox.path+sandbox.folder+"/"+sandbox.file_name+"\'")
-                    success();
+
+                    fs.writeFile(sandbox.path + sandbox.folder+"/inputFile", sandbox.stdin_data,function(err) 
+                    {
+                        if (err) 
+                        {
+                            console.log(err);
+                        }    
+                        else
+                        {
+                            console.log("Input file was saved!");
+                            success();
+                        } 
+                    });
+
+                    
                 } 
             });
 
+
+
+            
         });
 
 }
@@ -140,9 +158,21 @@ DockerSandbox.prototype.execute = function(success)
             //if file is found simply display a message and proceed
             else if (myC < sandbox.timeout_value) 
             {
-                console.log("DONE");
+                console.log("DONE")
+                //check for possible errors
+                fs.readFile(sandbox.path + sandbox.folder + '/errors', 'utf8', function(err2, data2) 
+                {
+                	if(!data2) data2=""
+                		console.log("Error file: ")
+                		console.log(data2)
+
+                		console.log("Main File")
+                		console.log(data)
+                   	success(data,data2)
+                });
+
                 //return the data to the calling functoin
-            	success(data);
+            	
             } 
             //if time is up. Save an error message to the data variable
             else 
@@ -152,8 +182,11 @@ DockerSandbox.prototype.execute = function(success)
             		if (!data) data = "";
                     data += "\nExecution Timed Out";
                     console.log("Timed Out: "+sandbox.folder+" "+sandbox.langName)
-
-            		success(data);	
+                    fs.readFile(sandbox.path + sandbox.folder + '/errors', 'utf8', function(err2, data2) 
+	                {
+	                	if(!data2) data2=""
+	                   	success(data,data2)
+	                });
             	});
                 
             }

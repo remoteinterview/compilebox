@@ -15,7 +15,7 @@ compiler=$1
 file=$2
 output=$3
 addtionalArg=$4
-
+input="inputFile"
 
 ########################################################################
 #	- The script works as follows
@@ -38,29 +38,30 @@ addtionalArg=$4
 #	
 ########################################################################
 
-exec  1> $"/usercode/logfile.txt"
-exec  2> $"/usercode/errors"
-#3>&1 4>&2 >
+exec 3>&1 4>&2 > >(tee /usercode/logfile.txt) 2>&1
 
 #Branch 1
 if [ "$output" = "" ]; then
-    $compiler /usercode/$file -< $"/usercode/inputFile" #| tee /usercode/output.txt
+    $compiler /usercode/$file < $input #| tee /usercode/output.txt
 #Branch 2
 else
 	#In case of compile errors, redirect them to a file
-        $compiler /usercode/$file $addtionalArg #&> /usercode/errors.txt
+        $compiler /usercode/$file $addtionalArg &> /usercode/errors.txt
+
 	#Branch 2a
 	if [ $? -eq 0 ];	then
-		$output -< $"/usercode/inputFile" #| tee /usercode/output.txt    
+		$output < $input #| tee /usercode/output.txt    
 	#Branch 2b
 	else
 	    echo "Compilation Failed"
 	    #if compilation fails, display the output file	
-	    #cat /usercode/errors.txt
+	    cat /usercode/errors.txt
+
 	fi
+	
 fi
 
-#exec 1>&3 2>&4
+exec 1>&3 2>&4
 
 #head -100 /usercode/logfile.txt
 #touch /usercode/completed

@@ -38,6 +38,12 @@ h3{
     <label>Code:</label>
     <textarea id="code">print 'Hello!'</textarea>
     <br>
+    <br>
+    <label>STDIN:</label>
+    <textarea id="stdin">
+        hello
+    </textarea>
+    
 
     <input type="button" value="Compile" id="send">
     <p class="output" id="output">Output appears here</p>
@@ -70,9 +76,12 @@ h3{
     $('#send').on('click', function() {
         var langid = $('#langid').val();
         var codeF = $('#code').val();
+        var stdin = $('#stdin').val();
+
         var json = {
             language: langid,
-            code: codeF
+            code: codeF,
+            stdin:stdin
         };
         console.log(json);
 
