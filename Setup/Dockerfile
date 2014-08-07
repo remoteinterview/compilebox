@@ -4,7 +4,7 @@
 # Based on Ubuntu
 ############################################################
 
-FROM virtual_machine
+FROM chug/ubuntu14.04x64
 MAINTAINER ASAD MEMON, OSMAN ALI
 
 # Update the repository sources list
