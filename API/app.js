@@ -56,10 +56,10 @@ app.post('/compile',bruteforce.prevent,function(req, res)
 
     //data will contain the output of the compiled/interpreted code
     //the result maybe normal program output, list of error messages or a Timeout error
-    sandboxType.run(function(data,err)
+    sandboxType.run(function(data,exec_time,err)
     {
         //console.log("Data: received: "+ data)
-    	res.send({output:data, langid: language,code:code, errors:err});
+    	res.send({output:data, langid: language,code:code, errors:err, time:exec_time});
     });
    
 });

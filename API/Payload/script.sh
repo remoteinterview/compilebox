@@ -20,8 +20,8 @@ addtionalArg=$4
 ########################################################################
 #	- The script works as follows
 #	- It first stores the stdout and std err to another stream
-#	- The output of the stream is then sent to a named pipe '>' which stores it into a log file
-#	- Both stderr and stdout are merged
+#	- The output of the stream is then sent to respective files
+#	
 #	
 #	- if third arguemtn is empty Branch 1 is followed. An interpretor was called
 #	- else Branch2 is followed, a compiler was invoked
@@ -42,6 +42,7 @@ exec  1> $"/usercode/logfile.txt"
 exec  2> $"/usercode/errors"
 #3>&1 4>&2 >
 
+START=$(date +%s.%2N)
 #Branch 1
 if [ "$output" = "" ]; then
     $compiler /usercode/$file -< $"/usercode/inputFile" #| tee /usercode/output.txt
@@ -64,6 +65,12 @@ fi
 
 #head -100 /usercode/logfile.txt
 #touch /usercode/completed
+END=$(date +%s.%2N)
+runtime=$(echo "$END - $START" | bc)
+
+
+echo "*-COMPILEBOX::ENDOFOUTPUT-*" $runtime 
+
 
 mv /usercode/logfile.txt /usercode/completed
 

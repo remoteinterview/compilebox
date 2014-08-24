@@ -1,10 +1,9 @@
-
 ############################################################
 # Dockerfile to build sandbox for executing user code
 # Based on Ubuntu
 ############################################################
 
-FROM chug/ubuntu14.04x64
+FROM chug/ubuntu14.04x64 
 MAINTAINER ASAD MEMON, OSMAN ALI
 
 # Update the repository sources list
@@ -12,7 +11,7 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/
 RUN apt-get update
 #RUN apt-get upgrade
 #Install all the languages/compilers we are supporting.
-RUN apt-get install -y gcc 
+RUN apt-get install -y gcc
 RUN apt-get install -y g++
 RUN apt-get install -y php5-cli
 RUN apt-get install -y ruby
@@ -45,4 +44,10 @@ RUN apt-get install -y gnustep-devel &&  sed -i 's/#define BASE_NATIVE_OBJC_EXCE
 
 
 RUN apt-get install -y scala
-RUN npm install -g express && export NODE_PATH=/usr/local/lib/node_modules/
+RUN apt-get install -y mysql-server
+
+RUN apt-get install -y sudo
+RUN apt-get install -y bc
+
+RUN echo "mysql ALL = NOPASSWD: /usr/sbin/service mysql start" | cat >> /etc/sudoers
+

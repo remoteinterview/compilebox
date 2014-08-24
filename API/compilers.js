@@ -35,5 +35,6 @@ compilerArray[9] = ["\'vbnc -nologo -quiet\'","file.vb","\'mono /usercode/file.e
 compilerArray[10] = ["gmcs","file.cs","\'mono /usercode/file.exe\'","C#",""];
 compilerArray[11] = ["/bin/bash","file.sh"," ","Bash",""];
 compilerArray[12] = ["gcc ","file.m"," /usercode/a.out","Objective-C","\' -o /usercode/a.out -I/usr/include/GNUstep -L/usr/lib/GNUstep -lobjc -lgnustep-base -Wall -fconstant-string-class=NSConstantString\'"];
+compilerArray[13] = ["/usercode/sql_runner.sh","file.sql","","MYSQL",""];
 
 exports.compilerArray=compilerArray;
