@@ -45,6 +45,7 @@ RUN apt-get install -y gnustep-devel &&  sed -i 's/#define BASE_NATIVE_OBJC_EXCE
 
 RUN apt-get install -y scala
 RUN apt-get install -y mysql-server
+RUN apt-get install -y perl
 
 RUN apt-get install -y sudo
 RUN apt-get install -y bc

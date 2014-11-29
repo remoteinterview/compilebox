@@ -13,12 +13,14 @@ var LANGS = {
     "VB.NET": [9, "text/x-vb"],
     "Bash": [11, "text/x-bash"],
     "Objective-C": [12,"text/x-objectivec"],
-    "MySQL": [13,"text/x-sql"]
+    "MySQL": [13,"text/x-sql"],
+    "Perl": [14, "text/x-perl"],
 }
 
 
 
 var Codes = {
+    "Perl" : "use strict;\nuse warnings\n;use v5.14; say 'Hello';",
     "MySQL":"create table myTable(name varchar(10));\ninsert into myTable values(\"Hello\");\nselect * from myTable;",
     "Java": "/* package whatever; // don't place package name! */\n\nimport java.io.*;\n\nclass myCode\n{\n\tpublic static void main (String[] args) throws java.lang.Exception\n\t{\n\t\t\n\t\tSystem.out.println(\"Hello\");\n\t}\n}",
     "C/C++": "#include <iostream>\nusing namespace std;\n\nint main() {\n\tcout<<\"Hello\";\n\treturn 0;\n}",

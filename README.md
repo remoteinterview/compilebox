@@ -28,7 +28,12 @@ No two codes have access to each other’s *Docker* or files.
     	1. **timeout_value**: The time in seconds till which the API should wait for the output of the code before generating an "Execution Timed Out" message.
         2. **port**: The port on which the server will listen, the default port is 80.
         
-    - To test the installation, open a new terminal windows, cd to the API folder and type the following command 
+    - To test the installation, open a new terminal windows, cd to the API folder and type the following command
+	```
+    $ npm install .
+    ```
+	to install all needed nodejs modules, followed by
+	
     ```
     $ sudo nodejs app.js
     ```
