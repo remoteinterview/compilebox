@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <script src="langs.js"></script>
+    <script src="langs.js"></script><!-- installing script creating codes and creating templates for intial page  -->
 </head>
 
 <style type="text/css">
@@ -32,6 +32,7 @@ h3{
 		This is an example client to demo the sandboxed compiling.
 	</p>
 	<h3>Code Compile</h3>
+<!-- getiing the id of the language -->
     <label>Language ID <a href="#" id="langhelp">(list)</a>:</label>
     <input type='text' id="langid" value=0>
     <br>
@@ -39,13 +40,16 @@ h3{
     <textarea id="code">print 'Hello!'</textarea>
     <br>
     <br>
+<!-- creating box for stdin -->
     <label>STDIN:</label>
     <textarea id="stdin">
         hello
     </textarea>
     
 
+
     <input type="button" value="Compile" id="send">
+<!-- output box -->
     <p class="output" id="output">Output appears here</p>
     <hr>
     <h3>Tests</h3>
@@ -77,7 +81,7 @@ h3{
         var langid = $('#langid').val();
         var codeF = $('#code').val();
         var stdin = $('#stdin').val();
-
+// passing the json file to the page 
         var json = {
             language: langid,
             code: codeF,
