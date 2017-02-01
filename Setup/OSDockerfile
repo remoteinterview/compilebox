@@ -1,0 +1,18 @@
+############################################################
+# Dockerfile to build sandbox for executing user code
+# Based on Ubuntu
+############################################################
+
+FROM chug/ubuntu14.04x64 
+MAINTAINER ASAD MEMON, OSMAN ALI
+
+# Update the repository sources list
+RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
+RUN apt-get update
+
+#Install all the languages/compilers we are supporting.
+RUN apt-get install -y gcc
+#RUN apt-get install -y mysql-server
+
+#Install bc to calculate runtime
+RUN apt-get install -y bc
