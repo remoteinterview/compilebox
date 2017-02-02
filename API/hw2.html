@@ -1,106 +1,76 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <script src="langs.js"></script><!-- installing script creating codes and creating templates for intial page -->
 </head>
 
 <style type="text/css">
-label {
-    width:200px;
-    display: inline-block;
-    float: left;
-}
-input, textarea {
-    display: inline-block;
-}
-.output{
-	font-family: monospace;
-	white-space: pre-line;
-	border:1px solid #ccc;
-	background: #eee;
-	min-height: 50px;
-}
-
-h3{
-	margin-top: 0;
-	padding: 0;
-}
+	input, textarea {
+    		display: inline-block;
+	}
+		
+	textarea {
+		
+	}
+	
+	.output {
+		font-family: monospace;
+	}
 </style>
 
 <body>
 
-    <textarea id="code">print 'Hello!'</textarea>
-    <br>
-    <br>
+	<textarea id="code" cols=80 rows=24></textarea>
+    	<br>
+    	<br>
+	<select id="hw_type">
+		<option value="0">C</option>
+		<option value="2">Written</option>
+	</select>	
+	<br>
+	<br>
+    	<input type="button" value="Submit" id="submit">
+    	<br>
+	<br>
+	<div id="output"></div>
 
-    <input type="button" value="Compile" id="send">
-<!-- output box -->
-    <p class="output" id="output">Output appears here</p>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    	<script type="text/javascript">
+    	
+	//COMPILE USER GIVEN CODE
+    	$('#submit').on('click', function() {
+		var output = $('#output');
 
-    <script type="text/javascript">
+		var langid = $('#hw_type').val();
+		if (langid == 2) {
+			$.post("/written", function(data, error, xhr) {
+				if (data.output)
+					output.css('color', 'green').html("PASSED");
+				else
+					output.css('color', 'red').html("FAILED");
+			});
+			return;
+		}
+        	
+		var code = $('#code').val();
+        	var json = {
+            		language: langid,
+            		code: code,
+        	};
 
-    //SHOW LANGUAGE CODES TO USER ON CLICKING HELP LINK
-    $('#langhelp').on('click',function () {
-    	var msg = "These are the languages and their langids: \n[LANGID]: [LANGUAGE]\n";
-    	var langs = [];
-    	for (var i in LANGS)
-    	{
-    		msg += LANGS[i][0] + ": " + i +"\n";	
-    	}
+        	console.log(json);
 
-    	alert(msg);
-    });
+        	$.post("/compile", json, function(data, error, xhr) {
+			//output.html(data.output);
+			if (data.output)
+				output.css('color', 'green').html("PASSED");
+			else
+				output.css('color', 'red').html("FAILED");
+        	});
+    	});
 
-
-    //COMPILE USER GIVEN CODE
-    $('#send').on('click', function() {
-        var langid = $('#langid').val();
-        var codeF = $('#code').val();
-        var stdin = $('#stdin').val();
-// passing the json file to the page 
-        var json = {
-            language: langid,
-            code: codeF,
-            stdin:stdin
-        };
-        console.log(json);
-
-        $.post("/compile", json, function(data, error, xhr) {
-
-            document.getElementById("output").innerHTML = data.output;
-        });
-    });
-
-
-    //RUN TESTS ON ALL LANGUAGES
-    var langid_to_name = [];
-
-    $('#testAll').on('click', function() {
-    	//send compile request for each language
-        for (var i in LANGS) {
-            var langid = LANGS[i][0];
-            var codeF = Codes[i];
-            langid_to_name[langid] = i;
-
-            //prepare data
-            var json = {
-                language: langid,
-                code: codeF
-            };
-
-            //send post and print result
-            $.post("/compile", json, function(data, error, xhr) {
-
-                $("#testsoutput").append("<b>"+langid_to_name[data.langid] + "</b>: " +
-                    data.output + "<br><br>");
-            });
-
-        }
-    });
-    </script>
-
+    	</script>
 </body>
 
 </html>

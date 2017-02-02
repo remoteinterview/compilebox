@@ -16,7 +16,10 @@
 	*Revised on: 30th June 2014 (Added Column number 4 to display the name of languages to console)
 */
 
-exports.compilerArray= [ ["python","file.py","","Python",""],
+exports.compilerArray= [ ["\'gcc -o /usercode/a.out\'", "file.c", "/usercode/a.out", "C", ""],
+			 ["/bin/bash", "file.sh", " ", "Bash", ""] ];
+/*
+			  ["python","file.py","","Python",""],
 			 ["ruby","file.rb","","Ruby",""],
 			 ["clojure","file.clj","","Clojure",""],
 			 ["php","file.php","","Php",""],
@@ -32,4 +35,4 @@ exports.compilerArray= [ ["python","file.py","","Python",""],
 			 ["/usercode/sql_runner.sh","file.sql","","MYSQL",""],
 			 ["perl","file.pl","","Perl",""],
 			 ["\'g++ -o /usercode/a.out\' ","file.cpp","/usercode/a.out","C++",""] ];
-
+*/

@@ -38,8 +38,8 @@ function random(size) {
 }
 
 
-app.post('/compile',bruteforce.prevent,function(req, res) 
-{
+app.post('/compile', bruteforce.prevent, function(req, res) {
+
     var language = req.body.language;
     var code = req.body.code;
  
@@ -65,11 +65,16 @@ app.post('/compile',bruteforce.prevent,function(req, res)
     	//the result maybe normal program output, list of error messages or a Timeout error
     	sandboxType.run(function(data,exec_time,err)
     	{
-    		res.send({output:data, langid: language,code:code, errors:err, time:exec_time});
-    	});
+    		//res.send({output:data, langid: language,code:code, errors:err, time:exec_time});
+    		res.send({output:1, langid:language, code:code, errors:err, time:exec_time});
+	});
     });
 });
 
+app.post('/written', bruteforce.prevent, function(req, res) {
+
+	res.send({output:0});
+});
 
 app.get('/', function(req, res) 
 {
