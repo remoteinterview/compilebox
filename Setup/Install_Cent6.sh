@@ -11,7 +11,7 @@ yum install -y docker-io
 echo "Docker Setup Complete"
 
 ############################
-# NodeJS Setup
+# NodeJS 6 Setup
 ############################
 curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 yum -y install nodejs gcc-c++ make
