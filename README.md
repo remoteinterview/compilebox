@@ -50,6 +50,7 @@ No two codes have access to each other’s *Docker* or files.
     - Ubuntu 13.10
     - Ubuntu 14.04 LTS
     - Linux Mint 15 
+    - CentOS 6 (root required not sudo)
     
 ## Selecting The languages for Installation Inside Docker ##
 
