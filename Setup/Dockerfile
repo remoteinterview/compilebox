@@ -51,4 +51,3 @@ RUN apt-get install -y sudo
 RUN apt-get install -y bc
 
 RUN echo "mysql ALL = NOPASSWD: /usr/sbin/service mysql start" | cat >> /etc/sudoers
-

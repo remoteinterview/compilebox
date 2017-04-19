@@ -20,7 +20,7 @@
          * @param {String} code: The actual code
          * @param {String} output_command: Used in case of compilers only, to execute the object code, send " " in case of interpretors
 */
-var DockerSandbox = function(timeout_value,path,folder,vm_name,compiler_name,file_name,code,output_command,languageName,e_arguments,stdin_data)
+var DockerSandbox = function(timeout_value, path, folder, vm_name, compiler_name, file_name, code, output_command, languageName, e_arguments, stdin_data)
 {
 
     this.timeout_value=timeout_value;
@@ -131,7 +131,7 @@ DockerSandbox.prototype.execute = function(success)
     var sandbox = this;
 
     //this statement is what is executed
-    var st = this.path+'DockerTimeout.sh ' + this.timeout_value + 's -u mysql -e \'NODE_PATH=/usr/local/lib/node_modules\' -i -t -v  "' + this.path + this.folder + '":/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command+ ' ' + this.extra_arguments;
+    var st = this.path+'DockerTimeout.sh ' + this.timeout_value + 's -e \'NODE_PATH=/usr/local/lib/node_modules\' -i -t -v  "' + this.path + this.folder + '":/usercode ' + this.vm_name + ' /usercode/script.sh ' + this.compiler_name + ' ' + this.file_name + ' ' + this.output_command+ ' ' + this.extra_arguments;
     
     //log the statement in console
     console.log(st);

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<style type="text/css">
+	input, textarea {
+    		display: inline-block;
+	}
+		
+	textarea {
+		
+	}
+	
+	.output {
+		font-family: monospace;
+	}
+</style>
+
+<body>
+
+	<textarea id="code" cols=80 rows=24></textarea>
+    	<br>
+    	<br>
+	<select id="hw_type">
+		<option value="0">C</option>
+		<option value="2">Written</option>
+	</select>	
+	<br>
+	<br>
+    	<input type="button" value="Submit" id="submit">
+    	<br>
+	<br>
+	<div id="output"></div>
+
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    	<script type="text/javascript">
+    	
+	//COMPILE USER GIVEN CODE
+    	$('#submit').on('click', function() {
+		var output = $('#output');
+
+		var langid = $('#hw_type').val();
+		if (langid == 2) {
+			$.post("/written", function(data, error, xhr) {
+				if (data.output)
+					output.css('color', 'green').html("PASSED");
+				else
+					output.css('color', 'red').html("FAILED");
+			});
+			return;
+		}
+        	
+		var code = $('#code').val();
+        	var json = {
+            		language: langid,
+            		code: code,
+        	};
+
+        	console.log(json);
+
+        	$.post("/compile", json, function(data, error, xhr) {
+			//output.html(data.output);
+			if (data.output)
+				output.css('color', 'green').html("PASSED");
+			else
+				output.css('color', 'red').html("FAILED");
+        	});
+    	});
+
+    	</script>
+</body>
+
+</html>

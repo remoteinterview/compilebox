@@ -1,128 +1,15 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <script src="langs.js"></script><!-- installing script creating codes and creating templates for intial page  -->
+	<meta charset="utf-8">
+	<title>CST 334 Homework Feedback</title>
 </head>
 
-<style type="text/css">
-label {
-    width:200px;
-    display: inline-block;
-    float: left;
-}
-input, textarea {
-    display: inline-block;
-}
-.output{
-	font-family: monospace;
-	white-space: pre-line;
-	border:1px solid #ccc;
-	background: #eee;
-	min-height: 50px;
-}
-
-h3{
-	margin-top: 0;
-	padding: 0;
-}
-</style>
-
 <body>
-	<p>
-		This is an example client to demo the sandboxed compiling.
-	</p>
-	<h3>Code Compile</h3>
-<!-- getiing the id of the language -->
-    <label>Language ID <a href="#" id="langhelp">(list)</a>:</label>
-    <input type='text' id="langid" value=0>
-    <br>
-    <label>Code:</label>
-    <textarea id="code">print 'Hello!'</textarea>
-    <br>
-    <br>
-<!-- creating box for stdin -->
-    <label>STDIN:</label>
-    <textarea id="stdin">
-        hello
-    </textarea>
-    
-
-
-    <input type="button" value="Compile" id="send">
-<!-- output box -->
-    <p class="output" id="output">Output appears here</p>
-    <hr>
-    <h3>Tests</h3>
-    <input type="button" value="Test All Languages" id="testAll">
-
-
-    <p id="testsoutput" class="output">Output of all tests appear here<br><br>
-    </p>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-    <script type="text/javascript">
-
-    //SHOW LANGUAGE CODES TO USER ON CLICKING HELP LINK
-    $('#langhelp').on('click',function () {
-    	var msg = "These are the languages and their langids: \n[LANGID]: [LANGUAGE]\n";
-    	var langs = [];
-    	for (var i in LANGS)
-    	{
-    		msg += LANGS[i][0] + ": " + i +"\n";	
-    	}
-
-    	alert(msg);
-    });
-
-
-    //COMPILE USER GIVEN CODE
-    $('#send').on('click', function() {
-        var langid = $('#langid').val();
-        var codeF = $('#code').val();
-        var stdin = $('#stdin').val();
-// passing the json file to the page 
-        var json = {
-            language: langid,
-            code: codeF,
-            stdin:stdin
-        };
-        console.log(json);
-
-        $.post("/compile", json, function(data, error, xhr) {
-
-            document.getElementById("output").innerHTML = data.output;
-        });
-    });
-
-
-    //RUN TESTS ON ALL LANGUAGES
-    var langid_to_name = [];
-
-    $('#testAll').on('click', function() {
-    	//send compile request for each language
-        for (var i in LANGS) {
-            var langid = LANGS[i][0];
-            var codeF = Codes[i];
-            langid_to_name[langid] = i;
-
-            //prepare data
-            var json = {
-                language: langid,
-                code: codeF
-            };
-
-            //send post and print result
-            $.post("/compile", json, function(data, error, xhr) {
-
-                $("#testsoutput").append("<b>"+langid_to_name[data.langid] + "</b>: " +
-                    data.output + "<br><br>");
-            });
-
-        }
-    });
-    </script>
-
+	<a href="hw2.html">Homework 2</a>
+	<br>
+	<a href="hw3.html">Homework 3</a>
 </body>
 
 </html>
