@@ -49,6 +49,7 @@ No two codes have access to each other’s *Docker* or files.
 	- Ubuntu 12.04 LTS
     - Ubuntu 13.10
     - Ubuntu 14.04 LTS
+    - Ubuntu 16.04 LTS
     - Linux Mint 15 
     - CentOS 6 (root required not sudo)
     
