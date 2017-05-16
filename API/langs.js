@@ -15,6 +15,7 @@ var LANGS = {
     "Objective-C": [12,"text/x-objectivec"],
     "MySQL": [13,"text/x-sql"],
     "Perl": [14, "text/x-perl"],
+    "Rust": [15, "text/rust"],
 }
 
 
@@ -34,6 +35,7 @@ var Codes = {
     "Bash": "echo 'Hi' ",
     "Objective-C": "#include <Foundation/Foundation.h>\n\n@interface Test\n+ (const char *) classStringValue;\n@end\n\n@implementation Test\n+ (const char *) classStringValue;\n{\n    return \"Hey!\";\n}\n@end\n\nint main(void)\n{\n    printf(\"%s\\n\", [Test classStringValue]);\n    return 0;\n}",
     "Scala": "object HelloWorld {def main(args: Array[String]) = println(\"Hello\")}",
-    "VB.NET": "Imports System\n\nPublic Class Test\n\tPublic Shared Sub Main() \n    \tSystem.Console.WriteLine(\"Hello\")\n\tEnd Sub\nEnd Class"
+    "VB.NET": "Imports System\n\nPublic Class Test\n\tPublic Shared Sub Main() \n    \tSystem.Console.WriteLine(\"Hello\")\n\tEnd Sub\nEnd Class",
+    "Rust": "fn main() {\n\tprintln!(\"Hello\");\n}",
 }
 

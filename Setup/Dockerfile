@@ -47,6 +47,11 @@ RUN apt-get install -y scala
 RUN apt-get install -y mysql-server
 RUN apt-get install -y perl
 
+RUN apt-get install -y curl
+RUN mkdir -p /opt/rust && \
+    curl https://sh.rustup.rs -sSf | HOME=/opt/rust sh -s -- --no-modify-path -y && \
+    chmod -R 777 /opt/rust
+
 RUN apt-get install -y sudo
 RUN apt-get install -y bc
 
