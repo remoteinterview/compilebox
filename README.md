@@ -11,7 +11,7 @@ Check the example work at:
 
 The client-side app submits the code and the languageID to the server through the API. The API then creates a new *Docker* container and runs the code using the compiler/interpreter of that language. The program runs inside a virtual machine with limited resources and has a time-limit for execution (20s by default). Once the output is ready it is sent back to the client-side app. The *Docker* container is destroyed and all the files are deleted from the server.
 
-No two codes have access to each other’s *Docker* or files.
+No two coders have access to each other’s *Docker* or files.
 
 
 ## Installation Instructions ##
