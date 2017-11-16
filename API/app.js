@@ -6,11 +6,16 @@
 */
 
 
+
+
 var express = require('express');
+var http = require('http');
 var arr = require('./compilers');
 var sandBox = require('./DockerSandbox');
-var app = express.createServer();
-var port=80;
+var bodyParser = require('body-parser');
+var app = express();
+var server = http.createServer(app);
+var port=8080;
 
 
 var ExpressBrute = require('express-brute');
@@ -21,7 +26,7 @@ var bruteforce = new ExpressBrute(store,{
 });
 
 app.use(express.static(__dirname));
-app.use(express.bodyParser());
+app.use(bodyParser());
 
 app.all('*', function(req, res, next) 
 {
@@ -71,4 +76,4 @@ app.get('/', function(req, res)
 });
 
 console.log("Listening at "+port)
-app.listen(port);
+server.listen(port);
