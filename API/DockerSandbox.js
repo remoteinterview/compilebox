@@ -202,7 +202,7 @@ DockerSandbox.prototype.execute = function(success)
 				console.log("Time: ")
 				console.log(time)
 
-	                   	success(data,data2)
+	                   	success(data,time,data2)
 	                });
             	});
                 
